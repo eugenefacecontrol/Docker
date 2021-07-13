@@ -1,0 +1,20 @@
+# version of the docker-compose
+version: '3'
+# Service is like saying a type of container, and we say: Here is what we want you to do:
+services: 
+# The name of the service:
+  redis-server:
+  # Using image:
+    image: 'redis'
+# The name of the service:
+  node-app:
+  # Restart policy for node service ("no", always, on-failure, unless-stopped). no is boolean false, so use it in the quoutes
+    restart: on-failure
+  # Look in the current dirrectory for the docker file and use it
+    build: .
+    ports:
+  # - means array of elements. <local port>:<container port>
+    - "4001:8081"
+
+# docker build -t yauhenisheima/visits:latest
+# docker run -p 8080:8080 yauhenisheima/visits

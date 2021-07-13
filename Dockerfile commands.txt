@@ -1,0 +1,5 @@
+https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/learn/lecture/11436696#notes
+Lessons\Section3\redis-image
+FROM - specify a docker image that we want to use as a base
+RUN - execute some command while we are preparing our custom image
+CMD - what should be executed when our image is used to startup the brand-new container

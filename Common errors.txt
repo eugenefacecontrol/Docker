@@ -1,0 +1,9 @@
+# Error after running "docker build .":
+error during connect: Post "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.24/build?buildargs=%7B%7D&cachefrom=%5B%5D&cgroupparent=&cpuperiod=0&cpuquota=0&cpusetcpus=&cpusetmems=&cpushares=0&dockerfile=dockerfile&labels=%7B%7D&memory=0&memswap=0&networkmode=default&rm=1&shmsize=0&target=&ulimits=null&version=1": open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
+
+Solution: Start Docker
+
+# Error after building a project: docker build .
+Error response from daemon: dockerfile parse error line 8: unknown instruction: CMD["NPM",
+
+Solution: You need a space between CMD and arguments
