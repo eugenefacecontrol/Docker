@@ -4,7 +4,7 @@ docker ps --all } show all containers
 docker run <image name> } create + start container
 docker run -d <image name> } create + start container in the background
 docker run busybox (echo Hello there | ls) } override the default command with new (if it supports it)
-docker run -it <im age name> <command name> } run a new container from image with the following command (e.g. sh)
+docker run -it <image name> <command name> } run a new container from image with the following command (e.g. sh)
 docker run -p <local port>:<container port> <image name> } every time I run the container, redirect incoming requests on local port <local port> to the port <container port> inside the controller
 docker create <image name> } create container from image and return its id
 docker create -p <local port>:<container port> <image name> } create container with redirected incoming requests on local port <local port> to the port <container port> inside the controller
