@@ -3,9 +3,11 @@ docker ps -all } show the last container
 docker ps --all } show all containers
 docker run <image name> } create + start container
 docker run -d <image name> } create + start container in the background
+docker run -e CI=true  <image name> } run the container without interaction
 docker run busybox (echo Hello there | ls) } override the default command with new (if it supports it)
 docker run -it <image name> <command name> } run a new container from image with the following command (e.g. sh)
 docker run -p <local port>:<container port> <image name> } every time I run the container, redirect incoming requests on local port <local port> to the port <container port> inside the controller
+docker run -it -v <bookmark on the specified folder> -v <<folder outside the container>:<folder inside the container>> <image name> } run the image with the bookmark on the specified folder and map folder inside the container to the folder outside the container. Note: Do not use '$(pwd)' variable, use '~' instead. Example: docker run -it -p 3000:3000 -v /home/node/app/node_modules -v ~/frontend:/home/node/app <image_id>
 docker create <image name> } create container from image and return its id
 docker create -p <local port>:<container port> <image name> } create container with redirected incoming requests on local port <local port> to the port <container port> inside the controller
 docker start -a <container id> } start created container
@@ -18,15 +20,21 @@ docker exec -it <container id> sh } open shell (command processer) on specific c
 Ctrl + D } exit the shell. Or just use word 'exit'
 
 
-docker build . } build the current project. Returns "writing image sha256:4e9898c2e20bb65776290534c40ed6e84d22d661a0fafc2b86d18fc278e0f34d" as output. characters after "sha256:" are image id. If "buildkit": false, then the result will be like this: "Successfully built f066c38ba027"
-docker build -t yauhenisheima/<image name>:<tag name> . } build the current project with tagged name by witch you will be able to call it. Tag "latest" will be automatically added, so you don't need to specify it
+docker build . } build the current project. Returns "writing image sha256:4e9898c2e20bb65776290534c40ed6e84d22d661a0fafc2b86d18fc278e0f34d" as output. characters after "sha256:" are image id. If "buildkit": false, then the result will be like this: "Successfully built f066c38ba027"~
+docker build -t yauhenisheima/<image name>:<tag name> . } build the current project with tagged name by witch you will b e able to call it. Tag "latest" will be automatically added, so you don't need to specify it
+docker build -f Dockerfile.dev . } build the current project with specified docker file
 
 docker system prune } remove all stopped containers and images
-
+docker system prune -f } remove all stopped containers, volumes and images
 
 docker commit -c "CMD 'redis-server'" <container id> } Create image from container
 
+docker attach <container id> } we are attaching to the stdin, stdout and stderr of the container
 docker-compose up } docker run <image name>
 docker-compose up --build } docker build . + docker run <image name>
 docker-compose up -d} docker run <image name> in the backround
 docker-compose down } stop all the containers
+
+npm run start } starts a development server
+npm run test } runs tests associated with the project
+npm run build } builds a production version of the application
