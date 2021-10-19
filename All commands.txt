@@ -11,6 +11,7 @@ docker run -it -v <bookmark on the specified folder> -v <<folder outside the con
 docker create <image name> } create container from image and return its id
 docker create -p <local port>:<container port> <image name> } create container with redirected incoming requests on local port <local port> to the port <container port> inside the controller
 docker start -a <container id> } start created container
+docker start -a <container id> --rm } delete the container after it is stopped
 docker logs <container id> } get log (all the information) from the container - you can use only after docker start <controller id>
 
 docker stop <container id> } stop container from running with some time to cleanup
@@ -18,7 +19,6 @@ docker kill <container id> } stop container from running instantly
 docker exec -it <container id> <command> } execute another command on specific container, -it allows us to provide input text to the container. -i means provide all the input text to the stdin. -t formats the text and little more
 docker exec -it <container id> sh } open shell (command processer) on specific container
 Ctrl + D } exit the shell. Or just use word 'exit'
-
 
 docker build . } build the current project. Returns "writing image sha256:4e9898c2e20bb65776290534c40ed6e84d22d661a0fafc2b86d18fc278e0f34d" as output. characters after "sha256:" are image id. If "buildkit": false, then the result will be like this: "Successfully built f066c38ba027"~
 docker build -t yauhenisheima/<image name>:<tag name> . } build the current project with tagged name by witch you will b e able to call it. Tag "latest" will be automatically added, so you don't need to specify it
@@ -34,7 +34,13 @@ docker-compose up } docker run <image name>
 docker-compose up --build } docker build . + docker run <image name>
 docker-compose up -d} docker run <image name> in the backround
 docker-compose down } stop all the containers
+docker-compose up --build --remove-orphans } remove unused services
 
 npm run start } starts a development server
 npm run test } runs tests associated with the project
 npm run build } builds a production version of the application
+-------------------------------------------------------
+Kubernetes
+kubectl version } print client and server versions
+kubectl apply -f <filename> } kubectl - CLI (Command line interfrace) we use to change our Kubernetes cluster; apply - Change the currect configuration of our cluster; -f - We want to specify a file that has the config changes; <filename> - Path to the file with the config
+kubectl get pods } get - We want to retrieve information about a runnings object; pods - specifies the object type that we want to get information about
