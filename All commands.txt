@@ -43,4 +43,16 @@ npm run build } builds a production version of the application
 Kubernetes
 kubectl version } print client and server versions
 kubectl apply -f <filename> } kubectl - CLI (Command line interfrace) we use to change our Kubernetes cluster; apply - Change the currect configuration of our cluster; -f - We want to specify a file that has the config changes; <filename> - Path to the file with the config
-kubectl get pods } get - We want to retrieve information about a runnings object; pods - specifies the object type that we want to get information about
+kubectl get pods -o wide} get - We want to retrieve information about a runnings object; pods - specifies the object type that we want to get information about, -o wide - additional information
+kubectl get storageclass } get available storages
+kubectl get pv } get persistent volumes
+kubectl get pvc } get persistent volume claims
+kubectl get pods -n ingress-nginx } get ingress processes
+kubectl describe <object type> <object name> } describe - We want to get detailed info, <object type> can be singular or plural (e.g. pod(s)), <object name> is optional
+kubectl delete -f <config file> } delete the obect via config file. <config file> - Path to the config file that created this object
+kubectl delete <object type> <object name> } delete the object via object type and name
+kubectl set image <object type>/<object name> <container name>=<new image to use>} set - We want to change a property, image - We want to change image property,<obect name> - object name specified in the corresponding yaml config file (metadata > name) <container name> - name specified in the corresponding yaml config file (template > spec > containers[0] > name)
+kubectl create secret generic <secret name> --from-literal key=value } create - Imperative command to create a new object, secret - Type of object we are going to create, generic - Type of a secret (also, there is a tls), <secret name> - Name of secret, for later reference in a pod config; --from-literal - We are going to add the secret information into this command, as opposed to from file, key=value - Key-value pair of the secret information
+
+There are several types of created objects: StatefulSet, ReplicaController, Pod - running one container or more, Service - setting up networking, Deployment - maintains a set of identical pods, ensuring that they have the correct config and that the right number exists, Volumes - A particular object that allows a container to store data at the pod level, PersistentVolumes, PersistentVolumeClaim, Secrets - Securely stores a piece of information in the cluster, such as a database password
+Service has 4 sub-types: ClusterIP (Exposes a set of pods to other objects in the cluster), NodePort (Exposes a container to the outside world), LoadBalancer (Legacy way of getting network traffic into a cluster) and Ingress (Exposes a set of services to the outside word)
